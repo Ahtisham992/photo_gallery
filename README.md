@@ -2,7 +2,7 @@
 
 A full-stack photo gallery application built with React and Node.js, designed for cloud deployment on AWS.
 
-## 🚀 Features
+##  Features
 
 ### Backend (Node.js + Express)
 - **User Authentication**: JWT-based authentication with secure password hashing
@@ -21,18 +21,18 @@ A full-stack photo gallery application built with React and Node.js, designed fo
 - **Photo Details**: View, edit, and delete photos
 - **Responsive Design**: Mobile-first responsive design
 
-## 📋 Prerequisites
+##  Prerequisites
 
 - Node.js (v16 or higher)
 - MySQL or PostgreSQL database
 - npm or yarn package manager
 
-## 🛠️ Local Development Setup
+##  Local Development Setup
 
 ### 1. Clone the Repository
 
 ```bash
-cd "d:/Software enginner/university/sem7/Cloud/Project"
+git clone https://github.com/Ahtisham992/photo_gallery.git
 ```
 
 ### 2. Backend Setup
@@ -59,6 +59,9 @@ npm run dev
 
 The backend will run on `http://localhost:5000`
 
+// backend running on aws cloud ec2 instance with rds
+ http://16.16.65.200:5000
+
 ### 3. Frontend Setup
 
 ```bash
@@ -81,7 +84,7 @@ The application will automatically create the required tables when you start the
 CREATE DATABASE photo_gallery;
 ```
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 Project/
@@ -129,7 +132,7 @@ Project/
 └── README.md
 ```
 
-## 🔌 API Endpoints
+##  API Endpoints
 
 ### Authentication
 - `POST /api/auth/register` - Register a new user
@@ -144,7 +147,7 @@ Project/
 - `PUT /api/photos/:id` - Update photo details
 - `DELETE /api/photos/:id` - Delete photo
 
-## 🐳 Docker Deployment
+##  Docker Deployment
 
 ### Build Backend Docker Image
 
@@ -165,7 +168,7 @@ docker run -p 5000:5000 \
   photo-gallery-backend
 ```
 
-## ☁️ AWS Deployment Guide
+##  AWS Deployment Guide
 
 ### Prerequisites for AWS Deployment
 
@@ -249,7 +252,7 @@ AWS_REGION=us-east-1
 #### Frontend
 Update API endpoint in production build to point to EC2 public IP or domain.
 
-## 🔒 Security Best Practices
+##  Security Best Practices
 
 - ✅ JWT tokens for authentication
 - ✅ Password hashing with bcrypt
@@ -261,7 +264,7 @@ Update API endpoint in production build to point to EC2 public IP or domain.
 - ✅ Security groups for network isolation
 - ✅ IAM roles for AWS resource access
 
-## 📝 Testing the Application
+##  Testing the Application
 
 ### Register a New User
 1. Navigate to `http://localhost:3000/register`
@@ -280,20 +283,16 @@ Update API endpoint in production build to point to EC2 public IP or domain.
 2. Search photos by title, description, or tags
 3. Click on a photo to view details
 
-## 🤝 Contributing
+##  Contributing
 
 This project is for educational purposes as part of a Cloud Computing course.
 
-## 📄 License
+##  License
 
 ISC
 
-## 👥 Team Members
+##  Team Members
 
-- [Team Member 1]
-- [Team Member 2]
-- [Team Member 3]
-
-## 📞 Support
-
-For issues or questions, please create an issue in the repository.
+- Muhammad Ahtisham (22i-2690)
+- Anhar Munir (22i-2481)
+- Usman Ghani (22i-8796)

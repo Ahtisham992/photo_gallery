@@ -178,11 +178,11 @@ curl -X POST http://localhost:5000/api/auth/login \
 
 ## Next Steps
 
-1. ✅ Application is running locally
-2. 📸 Upload some photos
-3. 🎨 Customize the UI (optional)
-4. ☁️ Follow `DEPLOYMENT.md` for AWS deployment
-5. 📚 Read `README.md` for detailed documentation
+1.  Application is running locally
+2.  Upload some photos
+3.  Customize the UI (optional)
+4.  Follow `DEPLOYMENT.md` for AWS deployment
+5.  Read `README.md` for detailed documentation
 
 ## Development Tips
 
@@ -258,4 +258,4 @@ Project/
 - Check the troubleshooting section above
 - Review error messages in terminal
 
-Happy coding! 🚀
+Happy coding! 
