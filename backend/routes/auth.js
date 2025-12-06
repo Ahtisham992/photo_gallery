@@ -5,7 +5,7 @@ const { body, validationResult } = require('express-validator');
 const { User } = require('../models');
 const auth = require('../middleware/auth');
 
-// Register user 
+// Register
 router.post('/register', [
   body('username').trim().isLength({ min: 3, max: 50 }),
   body('email').isEmail().normalizeEmail(),
@@ -20,7 +20,7 @@ router.post('/register', [
 
     const { username, email, password, fullName } = req.body;
 
-    // Check if user already exists or not
+    // Check if user already exists
     const existingUser = await User.findOne({
       where: {
         [require('sequelize').Op.or]: [{ email }, { username }]

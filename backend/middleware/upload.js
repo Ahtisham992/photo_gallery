@@ -4,13 +4,12 @@ const fs = require('fs');
 const { v4: uuidv4 } = require('uuid');
 
 // Create uploads directory if it doesn't exist
-
 const uploadDir = process.env.UPLOAD_DIR || 'uploads';
 if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir, { recursive: true });
 }
 
-// Configure storage 
+// Configure storage
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, uploadDir);
@@ -34,8 +33,7 @@ const fileFilter = (req, file, cb) => {
   }
 };
 
-// Create multer upload instance 
-
+// Create multer upload instance
 const upload = multer({
   storage: storage,
   limits: {
