@@ -20,7 +20,7 @@ DB_PASSWORD=your_password
 DB_NAME=photo_gallery
 JWT_SECRET=your_secret_key_here
 ```
-//public ip of backend 
+//public ip of backend as deployed on ec2.
 http://16.16.65.200:5000/
 
 4. Make sure MySQL/PostgreSQL is running and create the database:

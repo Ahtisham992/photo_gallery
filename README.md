@@ -1,6 +1,8 @@
 # Photo Gallery Application
 
 A full-stack photo gallery application built with React and Node.js, designed for cloud deployment on AWS.
+check this out:
+http://photo-gallery.eu-north-1.elasticbeanstalk.com
 
 ##  Features
 
@@ -188,7 +190,7 @@ docker run -p 5000:5000 \
 
 #### 1. Database Setup (RDS)
 
-1. Create RDS MySQL/PostgreSQL instance
+1. Create RDS MySQL instance
 2. Configure security group to allow EC2 access
 3. Note down the endpoint, username, and password
 
@@ -200,7 +202,7 @@ docker run -p 5000:5000 \
 
 #### 3. Backend Deployment (EC2)
 
-1. Launch EC2 instance (Amazon Linux 2 or Ubuntu)
+1. Launch EC2 instance (Amazon Linux 2)
 2. Install Docker on EC2
 3. Configure Security Group (allow ports 22, 5000)
 4. Create IAM role with S3 and RDS access

@@ -1,0 +1,12 @@
+GitHub Repository: https://github.com/Ahtisham992/photo_gallery.git
+
+Frontend URL: http://photo-gallery.eu-north-1.elasticbeanstalk.com
+
+Backend URL: http://16.16.65.200:5000
+
+Backend health check: http://16.16.65.200:5000/api/health
+
+Team Members:
+- Muhammad Ahtisham (22i-2690)
+- Anhar Munir (22i-2481)
+- Usman Ghani (22i-8796)

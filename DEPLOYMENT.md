@@ -1,48 +1,5 @@
-# AWS Deployment Guide
-
-This guide provides step-by-step instructions for deploying the Photo Gallery application on AWS.
-
-## Architecture Diagram
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│                         AWS Cloud                            │
-│                                                              │
-│  ┌──────────────────┐         ┌──────────────────┐         │
-│  │  Elastic         │         │   EC2 Instance   │         │
-│  │  Beanstalk       │◄────────┤   (Docker)       │         │
-│  │  (Frontend)      │   API   │   (Backend)      │         │
-│  └──────────────────┘         └────────┬─────────┘         │
-│           │                             │                    │
-│           │                             │                    │
-│           ▼                             ▼                    │
-│  ┌──────────────────┐         ┌──────────────────┐         │
-│  │   CloudFront     │         │   Amazon RDS     │         │
-│  │   (Optional)     │         │   (MySQL/Postgres)│         │
-│  └──────────────────┘         └──────────────────┘         │
-│                                         │                    │
-│                                         │                    │
-│                                ┌────────▼─────────┐         │
-│                                │   Amazon S3      │         │
-│                                │   (Photo Storage)│         │
-│                                └──────────────────┘         │
-│                                                              │
-│  ┌──────────────────────────────────────────────┐          │
-│  │              VPC & Security Groups            │          │
-│  │  - Public Subnet (EC2, Elastic Beanstalk)    │          │
-│  │  - Private Subnet (RDS)                       │          │
-│  │  - IAM Roles & Policies                       │          │
-│  └──────────────────────────────────────────────┘          │
-└─────────────────────────────────────────────────────────────┘
-```
-
-## Prerequisites
-
-- AWS Account
-- AWS CLI installed and configured
-- Domain name (optional, for custom domain)
-- Basic knowledge of AWS services
-
+# AWS Deployment instructions.
+All these deployement steps are followed to completely deploy system to cloud.
 ## Step 1: Database Setup (Amazon RDS)
 
 ### 1.1 Create RDS Instance
@@ -210,7 +167,7 @@ mkdir -p ~/photo-gallery-backend
 cd ~/photo-gallery-backend
 
 # Upload your backend code (use scp or git)
-# scp -i your-key.pem -r ./backend/* ec2-user@your-ec2-public-ip:~/photo-gallery-backend/
+scp -i your-key.pem -r ./backend/* ec2-user@your-ec2-public-ip:~/photo-gallery-backend/
 
 # Build Docker image
 docker build -t photo-gallery-backend .
@@ -254,7 +211,7 @@ cd frontend
 
 # Update API endpoint in production
 # Create .env.production file
-echo "VITE_API_URL=http://your-ec2-public-ip:5000" > .env.production
+echo "VITE_API_URL=http://16.16.65.200:5000" > .env.production
 
 # Build
 npm run build
@@ -300,130 +257,29 @@ Create a `package.json` in your build folder:
 
 Then rebuild the zip file.
 
-## Step 6: Configure HTTPS (Optional but Recommended)
 
-### 6.1 Request SSL Certificate (ACM)
+## 🔧 Nginx Config (.ebextensions/00_nginx.config)
 
-1. Go to AWS Certificate Manager
-2. Request certificate
-3. Add domain names
-4. Validate via DNS or email
-
-### 6.2 Add Load Balancer
-
-1. Go to EC2 → Load Balancers
-2. Create Application Load Balancer
-3. Add HTTPS listener with ACM certificate
-4. Configure target group pointing to EC2 instance
-
-## Step 7: Final Configuration
-
-### 7.1 Update Frontend API URL
-
-Update the frontend to use HTTPS and proper domain:
-
-```bash
-# Rebuild with production API URL
-VITE_API_URL=https://api.yourdomain.com npm run build
+```yaml
+files:
+  "/etc/nginx/conf.d/00_elastic_beanstalk_proxy.conf":
+    mode: "000644"
+    owner: root
+    group: root
+    content: |
+      server {
+          listen 8080;
+          
+          location / {
+              root /var/app/current;
+              try_files $uri $uri/ /index.html;
+          }
+      }
 ```
 
-### 7.2 Configure CORS on Backend
+This ensures:
+- All routes go to `index.html` (for React Router)
+- SPA routing works correctly
+- No 404 errors on refresh
 
-Update backend to allow frontend domain:
-
-```javascript
-// In server.js
-app.use(cors({
-  origin: ['https://yourdomain.com', 'http://localhost:3000'],
-  credentials: true
-}));
-```
-
-## Step 8: Testing
-
-1. Access frontend: `http://your-eb-url.elasticbeanstalk.com`
-2. Register a new user
-3. Upload a photo
-4. Verify photo is stored in S3
-5. Verify data is in RDS
-
-## Monitoring and Maintenance
-
-### CloudWatch Logs
-
-- Enable CloudWatch for EC2 and Elastic Beanstalk
-- Monitor application logs
-- Set up alarms for errors
-
-### Backup Strategy
-
-- Enable automated backups for RDS
-- Configure S3 versioning for photo bucket
-- Regular snapshots of EC2 instance
-
-### Cost Optimization
-
-- Use AWS Free Tier where possible
-- Stop EC2 instances when not in use (development)
-- Use S3 lifecycle policies for old photos
-- Monitor billing dashboard
-
-## Troubleshooting
-
-### Backend not connecting to RDS
-
-- Check security group rules
-- Verify RDS endpoint
-- Check VPC configuration
-- Test connection from EC2: `mysql -h endpoint -u admin -p`
-
-### Frontend can't reach backend
-
-- Check EC2 security group allows port 5000
-- Verify CORS configuration
-- Check API URL in frontend
-
-### Photos not uploading to S3
-
-- Verify IAM role attached to EC2
-- Check S3 bucket policy
-- Review CloudWatch logs for errors
-
-## Security Checklist
-
-- ✅ RDS in private subnet
-- ✅ Security groups properly configured
-- ✅ IAM roles with least privilege
-- ✅ Environment variables not in code
-- ✅ HTTPS enabled
-- ✅ S3 bucket policy restricts access
-- ✅ Regular security updates
-- ✅ CloudWatch monitoring enabled
-
-## Estimated Costs (Free Tier)
-
-- EC2 t2.micro: Free (750 hours/month)
-- RDS db.t3.micro: Free (750 hours/month)
-- S3: Free (5GB storage, 20,000 GET requests)
-- Elastic Beanstalk: Free (only pay for resources)
-- Data Transfer: First 100GB free
-
-**Total for first year: $0 (within free tier limits)**
-
-After free tier: ~$15-30/month depending on usage
-
-## Next Steps
-
-1. Set up custom domain
-2. Implement CDN with CloudFront
-3. Add auto-scaling for production
-4. Implement CI/CD pipeline
-5. Add monitoring and alerting
-6. Implement backup and disaster recovery
-
-## Support
-
-For issues during deployment, check:
-- AWS documentation
-- CloudWatch logs
-- Application logs in EC2
+---
