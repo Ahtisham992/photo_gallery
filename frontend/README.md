@@ -8,6 +8,7 @@ npm install
 ```
 
 2. Make sure the backend is running on http://localhost:5000
+as we have deployed backend so its running on http://16.16.65.200:5000.
 
 3. Start the development server:
 ```bash
