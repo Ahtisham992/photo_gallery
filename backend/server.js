@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(cors({
-  origin: '*', // Allow all origins (or specify your Elastic Beanstalk URL)
+  origin: '*', 
   credentials: true
 }));
 app.use(express.json());

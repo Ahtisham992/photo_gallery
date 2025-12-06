@@ -18,12 +18,12 @@ router.get('/', auth, async (req, res) => {
     // If userId is specified, get that user's photos, otherwise get all public photos
     if (userId) {
       where.userId = userId;
-      // Only show private photos if it's the current user
+      // Only show private photos if it's the current user is logined
       if (parseInt(userId) !== req.user.id) {
         where.isPublic = true;
       }
     } else {
-      // Show all public photos plus current user's private photos
+      // Show all public photos plus current user's private photos 
       where[require('sequelize').Op.or] = [
         { isPublic: true },
         { userId: req.user.id }
