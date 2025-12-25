@@ -290,7 +290,9 @@ Update API endpoint in production build to point to EC2 public IP or domain.
 This project is for educational purposes as part of a Cloud Computing course.
 
 ##  License
-
+![Node.js](https://img.shields.io/badge/Node.js-v16-green)
+![React](https://img.shields.io/badge/React-18-blue)
+![License](https://img.shields.io/badge/License-MIT-yellow)
 ISC
 
 ##  Team Members
