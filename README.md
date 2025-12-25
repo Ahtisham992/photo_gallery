@@ -1,8 +1,26 @@
 # Photo Gallery Application
 
-A full-stack photo gallery application built with React and Node.js, designed for cloud deployment on AWS.
-check this out:
-http://photo-gallery.eu-north-1.elasticbeanstalk.com
+A full-stack photo gallery application deployed on AWS, showcasing **React, Node.js, Docker, and cloud architecture skills**.
+
+**Live Demo:** [http://photo-gallery.eu-north-1.elasticbeanstalk.com](http://photo-gallery.eu-north-1.elasticbeanstalk.com)
+
+**Highlights:**
+- Full-stack application with **frontend, backend, database, and cloud deployment**
+- Deployed backend on **AWS EC2** with **Docker**
+- Deployed frontend on **AWS Elastic Beanstalk**
+- Database hosted on **AWS RDS (MySQL/PostgreSQL)**
+- Static assets stored in **AWS S3**
+- Implements **JWT authentication**, secure file uploads, and RESTful API design
+
+## Tech Stack & AWS Skills
+
+- **Frontend:** React 18, TailwindCSS, Vite  
+- **Backend:** Node.js, Express, Sequelize ORM  
+- **Database:** MySQL / PostgreSQL (RDS)  
+- **Cloud & Deployment:** AWS EC2, Elastic Beanstalk, S3, IAM Roles, VPC, Security Groups  
+- **DevOps:** Docker, Environment Variables, Deployment Scripts  
+- **Security:** JWT Authentication, Password Hashing, Input Validation, SQL Injection Protection
+
 
 ##  Features
 
@@ -22,6 +40,15 @@ http://photo-gallery.eu-north-1.elasticbeanstalk.com
 - **Upload**: Upload photos with title, description, and tags
 - **Photo Details**: View, edit, and delete photos
 - **Responsive Design**: Mobile-first responsive design
+
+## Achievements
+
+- Successfully deployed **end-to-end application on AWS Cloud**
+- Practiced **cloud architecture, networking, and security**
+- Implemented **Dockerized backend with RDS and S3 integration**
+- Designed **frontend with responsive UI and secure authentication**
+- Hands-on experience with **AWS EC2, Elastic Beanstalk, S3, IAM Roles**
+- Demonstrates ability to **build, deploy, and maintain cloud-native applications**
 
 ##  Prerequisites
 
